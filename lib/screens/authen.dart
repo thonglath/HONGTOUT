@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +11,8 @@ class Authen extends StatefulWidget {
   _AuthenState createState() => _AuthenState();
 }
 
-class _AuthenState extends State<Authen> {
+
+class _AuthenState extends State<Authen> with WidgetsBindingObserver{
 // field
 
 // Method
@@ -80,6 +82,38 @@ class _AuthenState extends State<Authen> {
     );
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.inactive:
+        print('WebSocket');
+        break;
+      default:
+    }
+  }
+
+  @override
+  // Actio After RunApp 
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('####### initState Work #####');
+    WidgetsBinding.instance.addObserver(this);
+
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+     print('####### initState Work #####');
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+// Action Before pause
   @override
   Widget build(BuildContext context) {
     return Scaffold(
